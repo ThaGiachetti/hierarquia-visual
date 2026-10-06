@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paleta das cafeterias de São Paulo</title>
+<style>
+  :root {
+    --primaria: #B3261E; --primaria-escura: #7C2A25; --primaria-clara: #D4574A;
+    --secundaria: #2F5DA8; --secundaria-escura: #1F4278; --secundaria-clara: #B4C6E4;
+    --destaque: #D2793F; --destaque-escura: #A85A27;
+    --madeira: #AD8B6F; --folhagem: #4F6B3A;
+    --parede: #EFE6DA; --azulejo: #F7F5F1; --linha: #DDD2C4; --apoio: #75604E; --texto: #2A1512;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: Georgia, "Times New Roman", serif; background: var(--azulejo); color: var(--texto); line-height: 1.6; }
+  main { max-width: 960px; margin: 0 auto; padding: 48px 20px 72px; }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; color: var(--primaria); }
+  h2 { font-size: 1.5rem; color: var(--secundaria); }
+  p { max-width: 62ch; }
+  .intro { margin-top: 12px; color: var(--apoio); font-size: 1.1rem; }
+
+  .proporcao { display: flex; height: 160px; margin: 40px 0 8px; border-radius: 6px; overflow: hidden; }
+  .proporcao div { display: flex; align-items: flex-end; padding: 12px 14px; font: 600 .95rem system-ui, sans-serif; }
+  .p60 { flex: 60; background: var(--primaria); color: #fff; }
+  .p30 { flex: 30; background: var(--secundaria); color: #fff; }
+  .p10 { flex: 10; background: var(--destaque); color: var(--texto); padding-inline: 8px; }
+  .legenda { color: var(--apoio); font-size: .95rem; margin-bottom: 48px; }
+
+  section { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--linha); }
+  section > p { margin: 6px 0 20px; }
+  .grupo { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .amostra { border: 1px solid var(--linha); border-radius: 6px; overflow: hidden; background: #fff; cursor: pointer;
+    text-align: left; padding: 0; font: inherit; color: inherit; width: 100%; }
+  .amostra:focus-visible { outline: 3px solid var(--secundaria); outline-offset: 2px; }
+  .cor { height: 96px; }
+  .info { padding: 10px 12px 12px; font: .9rem system-ui, sans-serif; }
+  .info strong, .info span { display: block; }
+  .info code { color: var(--apoio); font-size: .85rem; }
+  .info span { margin-top: 4px; }
+
+  .exemplo { margin-top: 20px; padding: 28px; border-radius: 6px; background: var(--parede); border: 1px solid var(--linha); }
+  .exemplo h3 { font-size: 1.5rem; color: var(--primaria); }
+  .exemplo .tag { display: inline-block; margin: 6px 0; font: 600 .85rem system-ui, sans-serif; color: var(--secundaria); }
+  .exemplo p { margin: 4px 0 18px; }
+  .botao { display: inline-block; padding: 10px 20px; border-radius: 4px; background: var(--destaque); color: var(--texto);
+    font: 600 1rem system-ui, sans-serif; text-decoration: none; }
+  .botao:hover { background: var(--destaque-escura); color: #fff; }
+  #aviso { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--texto); color: #fff;
+    padding: 8px 16px; border-radius: 4px; font: .9rem system-ui, sans-serif; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  #aviso.visivel { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { #aviso { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Paleta das cafeterias de São Paulo</h1>
+  <p class="intro">Cores tiradas de uma cafeteria real: esquadrias vermelhas, banco azul, madeira, terracota e muita folhagem.</p>
+
+  <div class="proporcao" role="img" aria-label="Proporção de uso: 60% vermelho, 30% azul, 10% terracota">
+    <div class="p60">60% vermelho</div>
+    <div class="p30">30% azul</div>
+    <div class="p10">10%</div>
+  </div>
+  <p class="legenda">O vermelho define a identidade, o azul organiza e a terracota chama para a ação. Clique em uma amostra para copiar o código.</p>
+
+  <div id="secoes"></div>
+
+  <section>
+    <h2>Na prática</h2>
+    <p>Um cartão de cafeteria usando os níveis juntos: título vermelho, categoria azul e um único botão terracota.</p>
+    <div class="exemplo">
+      <h3>Café da Esquina</h3>
+      <span class="tag">Centro · Sé</span>
+      <p>Grãos de torra média, mesas na calçada e vista para a rua.</p>
+      <a class="botao" href="#">Ver no mapa</a>
+    </div>
+  </section>
+</main>
+<div id="aviso" role="status"></div>
+<script>
+  const dados = [
+    { t: 'Primária: vermelho', d: 'Esquadrias e piso da cafeteria. É a cor da identidade: títulos, cabeçalho e grandes áreas.',
+      c: [['Vinho', '#7C2A25', 'Estados de clique, fundos escuros'],
+          ['Vermelho-janela', '#B3261E', 'Títulos, cabeçalho, áreas principais'],
+          ['Vermelho claro', '#D4574A', 'Ilustrações e realces suaves']] },
+    { t: 'Secundária: azul', d: 'Pés do banco. Organiza a página em categorias, links e marcadores de lugar.',
+      c: [['Azul escuro', '#1F4278', 'Links visitados e texto sobre claro'],
+          ['Azul-banco', '#2F5DA8', 'Links, categorias, subtítulos'],
+          ['Azul claro', '#B4C6E4', 'Fundos de filtros e etiquetas']] },
+    { t: 'Destaque: terracota', d: 'Vaso do cacto. Aparece pouco, só no que a pessoa deve clicar.',
+      c: [['Terracota-vaso', '#D2793F', 'Botão principal'],
+          ['Terracota escura', '#A85A27', 'Botão ao passar o mouse']] },
+    { t: 'Terrosas', d: 'Madeira e folhagem. Dão calor às ilustrações, fotos e ícones.',
+      c: [['Madeira', '#AD8B6F', 'Bordas, ícones, ilustrações'],
+          ['Folhagem', '#4F6B3A', 'Selos, ícones de plantas, avisos positivos']] },
+    { t: 'Neutras', d: 'Parede, azulejo e sombra. Sustentam a leitura e ocupam boa parte da tela.',
+      c: [['Azulejo', '#F7F5F1', 'Fundo da página'],
+          ['Parede', '#EFE6DA', 'Cartões e painéis'],
+          ['Linha', '#DDD2C4', 'Bordas e divisórias'],
+          ['Apoio', '#75604E', 'Legendas e textos secundários'],
+          ['Texto', '#2A1512', 'Texto principal']] }
+  ];
+  document.getElementById('secoes').innerHTML = dados.map(function (s) {
+    return '<section><h2>' + s.t + '</h2><p>' + s.d + '</p><div class="grupo">' +
+      s.c.map(function (c) {
+        return '<button class="amostra" data-hex="' + c[1] + '"><div class="cor" style="background:' + c[1] + '"></div>' +
+          '<div class="info"><strong>' + c[0] + '</strong><code>' + c[1] + '</code><span>' + c[2] + '</span></div></button>';
+      }).join('') + '</div></section>';
+  }).join('');
+  const aviso = document.getElementById('aviso');
+  document.querySelectorAll('.amostra').forEach(function (el) {
+    el.addEventListener('click', function () {
+      const hex = el.dataset.hex;
+      if (navigator.clipboard) navigator.clipboard.writeText(hex).catch(function () {});
+      aviso.textContent = hex + ' copiado';
+      aviso.classList.add('visivel');
+      setTimeout(function () { aviso.classList.remove('visivel'); }, 1400);
+    });
+  });
+</script>
+</body>
+</html>
